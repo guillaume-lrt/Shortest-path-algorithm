@@ -148,8 +148,8 @@ def shortest_path_v1(L):
     L3 = L[3:]   #list of point to add
     count = 0
     while len(L3) != 0:
-        name = 'greedy_shortest_path' + str(count) + '.png'
-        plot(L1,name)
+        # name = 'greedy_shortest_path' + str(count) + '.png'
+        # plot(L1,name)
         S = []   #list of all path without crossing
         for j in range(len(L1)):
             L2 = L1[:j] + [L3[0]] + L1[j:]
@@ -166,8 +166,8 @@ def shortest_path_v1(L):
         L1 = S[0][:-1]  #remove the loop
         L3.remove(L3[0])
         count += 1
-    name = 'greedy_shortest_path' + str(count) + '.png'
-    plot(L1,name)
+    # name = 'greedy_shortest_path' + str(count) + '.png'
+    # plot(L1,name)
     return L1 + [L1[0]], total_length(L1 + [L1[0]])
 
 def inversion(Lx,p1,p2):
@@ -194,6 +194,9 @@ def shortest_path_v2(Lx):
     # print('')
     global counter
     counter += 1
+
+    name = 'intersection_shortest_path' + str(counter) + '.png'
+    plot(L,name)
 
     if check_all_intersection(L):
         print('counter: ',counter,'\n')
@@ -254,7 +257,7 @@ def plot(list,name):
     ax.set_xlim((-27, 31))
     ax.set_ylim((-14, 27))
     plt.scatter([i[0] for i in CO],[j[1] for j in CO], s = 10)
-    fig.savefig(name, transparent=True, dpi=my_dpi)
+    fig.savefig(name, transparent=True, dpi=my_dpi)                   #uncomment this line to save all pictures -> create the gif
     # plt.show()
 
 # print(shortest_path_threshold(CO))
@@ -263,11 +266,13 @@ L = [(0,0),(-1,-0.7),(1,-1),(1,1),(-1,1/4),(0,-1/2)]
 
 tempo = choose_by_closest(CO)
 print('choose by closest: ',tempo)
-print(shortest_path_v2(tempo))
+tempo1 = shortest_path_v2(tempo)
+print('intersections: ',tempo1)
 print('')
 tempoo = shortest_path_v1(CO)
 print('greedy algorithm: ',tempoo)
 
-plot(tempoo[0],'greedy_shortest_path.png')
+plot(tempo1[0],'intersection_shortest_path.png')
+# plot(tempoo[0],'greedy_shortest_path.png')
 
 # print(is_intersection((7, -1), (-15, 6), (-18, 5),(-6,5)))
